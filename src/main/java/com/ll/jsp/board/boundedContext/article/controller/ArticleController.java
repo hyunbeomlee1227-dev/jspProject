@@ -36,35 +36,16 @@ public class ArticleController {
         rq.view("usr/article/write");
     }
 
-    public void doWrite(Rq rq) {String title = rq.getParam("title", "");
-        if (title.isBlank()) {
-            rq.appendBody("""
-                    <script>
-                        alert('제목을 입력해주세요.');
-                        history.back();
-                    </script>
-                    """);
-            return;
-        }
-
+    public void doWrite(Rq rq) {
+        String title = rq.getParam("title", "");
         String content = rq.getParam("content", "");
 
-        if (title.isBlank()) {
-            rq.appendBody("""
-                    <script>
-                        alert('내용을 입력해주세요.');
-                        history.back();
-                    </script>
-                    """);
-            return;
-        }
-
-        long id = ++lastId;
-        Article article = new Article(id, title, content);
+        Article article = new Article(++lastId, title, content);
 
         articleList.add(article);
 
         rq.appendBody("""
+                글 작성 완료
                 <div>%d 게시물 생성</div>
                 <div>제목 : %s</div>
                 <div>내용 : %s</div>
