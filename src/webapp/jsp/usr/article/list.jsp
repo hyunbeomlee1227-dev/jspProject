@@ -21,4 +21,6 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <a href="/usr/article/write">글쓰기</a>
 </div>
