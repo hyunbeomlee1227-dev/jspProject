@@ -59,6 +59,14 @@ public class Rq {
         }
     }
 
+    public void appendBody(String str) {
+        try {
+            resp.getWriter().append(str);
+        } catch (IOException e) {
+            throw new RuntimeException("응답 작성 중 오류가 발생했습니다.", e);
+        }
+    }
+
     public void view(String path) {
         //"/jsp/usr/article/list.jsp" 이런형태로 만들어줌
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/jsp/" + path + ".jsp");
@@ -78,5 +86,13 @@ public class Rq {
 
     public void setAttr(String name, Object value) {
         req.setAttribute(name, value);
+    }
+
+    public String getUrlPath() {
+        return req.getRequestURI();
+    }
+
+    public String getMethod() {
+        return req.getMethod();
     }
 }
