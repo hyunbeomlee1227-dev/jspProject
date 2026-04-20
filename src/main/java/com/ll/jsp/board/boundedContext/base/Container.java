@@ -1,14 +1,20 @@
 package com.ll.jsp.board.boundedContext.base;
 
 import com.ll.jsp.board.boundedContext.article.controller.ArticleController;
+import com.ll.jsp.board.boundedContext.article.repository.ArticleRepository;
+import com.ll.jsp.board.boundedContext.article.service.ArticleService;
 import com.ll.jsp.board.boundedContext.member.controller.MemberController;
 
 public class Container {
     public static MemberController memberController;
     public static ArticleController articleController;
+    public static ArticleRepository articleRepository;
+    public static ArticleService articleService;
 
     static {
         memberController = new MemberController();
         articleController = new ArticleController();
+        articleRepository = new ArticleRepository();
+        articleService = new ArticleService();
     }
 }
