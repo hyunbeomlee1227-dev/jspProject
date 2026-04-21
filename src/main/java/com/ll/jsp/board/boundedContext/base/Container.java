@@ -13,8 +13,8 @@ public class Container {
 
     static {
         memberController = new MemberController();
-        articleController = new ArticleController();
         articleRepository = new ArticleRepository();
         articleService = new ArticleService();
+        articleController = new ArticleController();
     }
 }

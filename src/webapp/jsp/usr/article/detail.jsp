@@ -20,4 +20,8 @@
     <div>
         <a href="/usr/article/list">목록</a>
     </div>
+
+    <div>
+        <a href="/usr/article/modify/${article.id}">수정</a>
+    </div>
 </div>

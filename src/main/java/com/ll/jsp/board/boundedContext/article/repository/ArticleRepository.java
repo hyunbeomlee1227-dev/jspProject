@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.stream.LongStream;
 
 public class ArticleRepository {
-    private List<Article> articleList;
+    private final List<Article> articleList;
     private long lastId;
 
     public ArticleRepository() {
         articleList = new ArrayList<>();
         makeTestData();
-        lastId = articleList.get(articleList.size() -1).getId();
+        lastId = articleList.getLast().getId();
     }
 
     void makeTestData() {
@@ -40,10 +40,19 @@ public class ArticleRepository {
         return id;
     }
 
-    public Article findById(int id) {
+    public Article findById(long id) {
         return articleList.stream()
                 .filter(article -> article.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public void modify(long id, String title, String content) {
+        Article article = findById(id);
+
+        if (article == null) return;
+
+        article.setTitle(title);
+        article.setContent(content);
     }
 }

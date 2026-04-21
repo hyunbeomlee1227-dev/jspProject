@@ -20,19 +20,19 @@ public class DispatcherServlet extends HttpServlet {
         MemberController memberController = Container.memberController;
         ArticleController articleController = Container.articleController;
 
-        String url = req.getRequestURI();
-
         switch (rq.getMethod()) {
             case "GET":
                 switch (rq.getActionPath()) {
                     case "/usr/article/write" -> articleController.showWrite(rq);
                     case "/usr/article/list" -> articleController.showList(rq);
                     case "/usr/article/detail" -> articleController.showDetail(rq);
+                    case "/usr/article/modify" -> articleController.showModify(rq);
                     case "/usr/member/join" -> memberController.showJoin(rq);
                 }
             case "POST":
                 switch (rq.getActionPath()) {
                     case "/usr/article/write" -> articleController.doWrite(rq);
+                    case "/usr/article/modify" -> articleController.doModify(rq);
                 }
         }
     }
