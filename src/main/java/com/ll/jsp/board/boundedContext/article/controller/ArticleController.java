@@ -17,6 +17,10 @@ public class ArticleController {
     public void showList(Rq rq) {
         List<Article> articleList = articleService.findAll();
 
+        if (articleList.isEmpty()) {
+            rq.replace("게시물이 존재하지 않습니다.", "/");
+        }
+
         rq.setAttr("articleList", articleList);
         rq.view("usr/article/list");
     }
@@ -27,40 +31,36 @@ public class ArticleController {
 
     public void doWrite(Rq rq) {
         String title = rq.getParam("title", "");
+
+        if (title.trim().isBlank()) {
+            rq.replace("제목을 입력해주세요.", "/usr/article/write");
+            return;
+        }
+
         String content = rq.getParam("content", "");
+
+        if (content.trim().isBlank()) {
+            rq.replace("내용을 입력해주세요.", "/usr/article/write");
+            return;
+        }
+
         long id = articleService.write(title, content);
 
-        rq.appendBody("""
-                글 작성 완료
-                <div>%d 게시물 생성</div>
-                <div>제목 : %s</div>
-                <div>내용 : %s</div>
-                <a href="/usr/article/list">목록으로</a>
-                """.formatted(id, title, content));
+        rq.replace("%d번 게시물이 작성되었습니다.".formatted(id), "/usr/article/detail/%d".formatted(id));
     }
 
     public void showDetail(Rq rq) {
         long id = rq.getLongPathValueByIndex(1, 0);
 
         if (id <= 0) {
-            rq.appendBody("""
-                    <script>
-                        alert('올바른 요청이 아닙니다.');
-                        history.back();
-                    </script>
-                    """);
+            rq.historyBack("올바른 요청이 아닙니다.");
             return;
         }
 
         Article article = articleService.findById(id);
 
         if (article == null) {
-            rq.appendBody("""
-                    <script>
-                        alert("%d번 게시물이 존재하지 않습니다.");
-                        history.back();
-                    </script>
-                    """.formatted(id));
+            rq.replace("%d번 게시물이 존재하지 않습니다.".formatted(id), "/usr/article/list");
             return;
         }
 
@@ -71,24 +71,14 @@ public class ArticleController {
     public void showModify(Rq rq) {
         long id = rq.getLongPathValueByIndex(1, 0);
         if (id <= 0) {
-            rq.appendBody("""
-                    <script>
-                        alert('올바른 요청이 아닙니다.');
-                        history.back();
-                    </script>
-                    """);
+            rq.historyBack("올바른 요청이 아닙니다.");
             return;
         }
 
         Article article = articleService.findById(id);
 
         if (article == null) {
-            rq.appendBody("""
-                    <script>
-                        alert("%d번 게시물이 존재하지 않습니다.");
-                        history.back();
-                    </script>
-                    """.formatted(id));
+            rq.replace("%d번 게시물이 존재하지 않습니다.".formatted(id), "/usr/article/list");
             return;
         }
 
@@ -101,35 +91,21 @@ public class ArticleController {
 
         String title = rq.getParam("title", "");
 
-        if (title.isBlank()) {
-            rq.appendBody("""
-                    <script>
-                        alert('제목을 입력해주세요.');
-                        history.back();
-                    </script>
-                    """);
+
+        if (title.trim().isBlank()) {
+            rq.replace("제목을 입력해주세요.", "/usr/article/modify/%d".formatted(id));
             return;
         }
 
         String content = rq.getParam("content", "");
 
-        if (title.isBlank()) {
-            rq.appendBody("""
-                    <script>
-                        alert('내용을 입력해주세요.');
-                        history.back();
-                    </script>
-                    """);
+        if (content.trim().isBlank()) {
+            rq.replace("내용을 입력해주세요.", "/usr/article/modify/%d".formatted(id));
             return;
         }
 
         articleService.modify(id, title, content);
 
-        rq.appendBody("""
-                <div>%d 게시물 수정</div>
-                <div>제목 : %s</div>
-                <div>내용 : %s</div>
-                <a href="/usr/article/list">목록으로</a>
-                """.formatted(id, title, content));
+        rq.replace("%d번 게시물이 수정되었습니다.".formatted(id), "/usr/article/detail/%d".formatted(id));
     }
 }

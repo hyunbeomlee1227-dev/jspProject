@@ -59,7 +59,8 @@ public class Rq {
         }
     }
 
-    public void appendBody(String str) {
+
+    public void print(String str) {
         try {
             resp.getWriter().append(str);
         } catch (IOException e) {
@@ -125,5 +126,27 @@ public class Rq {
         } catch (ArrayIndexOutOfBoundsException e) {
             return defaultValue;
         }
+    }
+
+    public void println(String str) {
+        print(str + "\n");
+    }
+
+    public  void replace (String msg, String url) {
+        println("""
+                <script>
+                    alert("%s");
+                    location.replace("%s");
+                </script>
+                """.formatted(msg, url));
+    }
+
+    public void historyBack(String msg) {
+        println("""
+                <script>
+                    alert("%s");
+                    history.back();
+                </script>
+                """.formatted(msg));
     }
 }
