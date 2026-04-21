@@ -17,7 +17,6 @@ public class ArticleController {
     public void showList(Rq rq) {
         List<Article> articleList = articleService.findAll();
 
-        System.out.println(articleList);
         rq.setAttr("articleList", articleList);
         rq.view("usr/article/list");
     }

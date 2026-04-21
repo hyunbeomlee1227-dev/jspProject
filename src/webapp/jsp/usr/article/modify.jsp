@@ -43,6 +43,7 @@
                    id="title"
                    name="title"
                    placeholder="제목을 입력해주세요"
+                   value="${article.title}"
                    required>
         </div>
 
@@ -51,7 +52,7 @@
             <textarea id="content"
                       name="content"
                       placeholder="내용을 입력해주세요"
-                      required></textarea>
+                      required>${article.content}</textarea>
         </div>
 
         <div>
