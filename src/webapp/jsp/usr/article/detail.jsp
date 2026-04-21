@@ -24,4 +24,26 @@
     <div>
         <a href="/usr/article/modify/${article.id}">수정</a>
     </div>
+    <a href="#" id="deleteLinkBtn">삭제</a>
+
+    <form
+            id="deleteForm"
+            action="/usr/article/delete"
+            method="POST"
+    >
+        <input type="hidden" name="deleteId" value="${article.id}" readonly>
+    </form>
 </div>
+
+<script>
+    const deleteLinkBtn = document.getElementById("deleteLinkBtn");
+    const deleteForm = document.getElementById("deleteForm");
+
+    deleteLinkBtn.addEventListener('click', function (e) {
+        e.preventDefault(); // 기본 링크 동작 방지
+        if (confirm("정말 삭제하시겠습니까?")) {
+            deleteForm.submit(); // 폼 제출
+        }
+    })
+
+</script>

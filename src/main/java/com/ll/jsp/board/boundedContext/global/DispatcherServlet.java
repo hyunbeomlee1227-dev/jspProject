@@ -33,6 +33,7 @@ public class DispatcherServlet extends HttpServlet {
                 switch (rq.getActionPath()) {
                     case "/usr/article/write" -> articleController.doWrite(rq);
                     case "/usr/article/modify" -> articleController.doModify(rq);
+                    case "/usr/article/delete" -> articleController.doDelete(rq);
                 }
         }
     }
