@@ -31,6 +31,7 @@ public class DispatcherServlet extends HttpServlet {
                     case "/usr/member/login" -> memberController.showLogin(rq);
                     case "/usr/member/me" -> memberController.showMe(rq);
                 }
+                break;
             case "POST":
                 switch (rq.getActionPath()) {
                     case "/usr/article/write" -> articleController.doWrite(rq);
@@ -38,7 +39,9 @@ public class DispatcherServlet extends HttpServlet {
                     case "/usr/article/delete" -> articleController.doDelete(rq);
                     case "/usr/member/join" -> memberController.doJoin(rq);
                     case "/usr/member/login" -> memberController.doLogin(rq);
+                    case "/usr/member/logout" -> memberController.doLogout(rq);
                 }
+                break;
         }
     }
 

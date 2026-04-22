@@ -4,6 +4,7 @@ import com.ll.jsp.board.boundedContext.member.dto.Member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.LongStream;
 
 public class MemberRepository {
     private List<Member> memberList;
@@ -11,7 +12,15 @@ public class MemberRepository {
 
     public MemberRepository() {
         memberList = new ArrayList<>();
-        lastId = 0;
+        makeTestData();
+        lastId = memberList.get(memberList.size() -1).getId();
+    }
+
+    void makeTestData() {
+        LongStream.rangeClosed(1, 5).forEach(i -> {
+            Member member = new Member(i, "user" + i, "user" + i, "user" + i);
+            memberList.add(member);
+        });
     }
 
     public void save(String username, String password, String name) {

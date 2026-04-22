@@ -66,5 +66,11 @@ public class MemberController {
         Member member = (Member) rq.getSessionAttr("loggedInMember");
         rq.print("로그인된 회원 : " + member.getUsername());
     }
+
+    public void doLogout(Rq rq) {
+        rq.removeSessionAttr("loggedInMember");
+
+        rq.replace("로그아웃 되었습니다.", "/");
+    }
 }
 
