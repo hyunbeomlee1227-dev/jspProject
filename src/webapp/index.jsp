@@ -4,4 +4,6 @@
 
 <div>
     <a href="/usr/article/list">게시글 목록</a>
+    <a href="/usr/article/join">회원가입</a>
+    <a href="/usr/article/login">로그인</a>
 </div>

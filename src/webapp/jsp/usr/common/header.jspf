@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<c:set var="isLoggedIn" value="${sessionScope.loggedInMember != null}" />
 <!doctype html>
 <html lang="ko">
 <head>
@@ -10,8 +11,17 @@
 
     <!-- 테일윈드 4.x CDN    -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <title>게시판</title>
 </head>
 <body>
+
+<nav>
+    <c:if test="${isLoggedIn}" >
+        <div>${sessionScope.loggedInMember.username} 님 반갑습니다.</div>
+    </c:if >
+
+    <c:if test="${!isLoggedIn}" >
+        <div><a href="/usr/member/login">로그인</a></div>
+    </c:if >
+</nav>

@@ -4,20 +4,19 @@
 
 <%@ include file="../common/header.jspf" %>
 <!-- 컨텐츠 영역 -->
-
 <div class="container">
-    <h2>회원 가입</h2>
-    <form method="POST" action="/usr/member/join">
+    <h2>로그인</h2>
+    <form method="POST" action="/usr/member/login">
         <div class="form-group">
             <label for="username">아이디</label>
             <input type="text" id="username" name="username" placeholder="아이디를 입력해주세요" required>
-            @@ -21,10 +21,10 @@
-            <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required>
         </div>
-
-        <button type="submit">회원가입</button>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="text" id="password" name="password" placeholder="비밀번호를 입력해주세요" required>
+        </div>
+        <button type="submit">로그인</button>
     </form>
 </div>
-
 <!-- 컨텐츠 영역 -->
 <%@ include file="../common/footer.jspf" %>

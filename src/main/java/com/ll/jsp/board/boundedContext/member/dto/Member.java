@@ -1,10 +1,12 @@
 package com.ll.jsp.board.boundedContext.member.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Member {
-    private final int id;
+    private final long id;
     private  String  username;
     private String password;
     private String name;
