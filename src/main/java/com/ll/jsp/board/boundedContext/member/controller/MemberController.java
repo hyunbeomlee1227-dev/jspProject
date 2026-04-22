@@ -27,6 +27,11 @@ public class MemberController {
     }
 
     public void showLogin(Rq rq) {
+        if (rq.isLogined()) {
+            rq.historyBack("잘못 된 접근입니다.");
+            return;
+        }
+
         rq.view("usr/member/login");
     }
 
@@ -57,8 +62,7 @@ public class MemberController {
             return;
         }
 
-        rq.setSessionAttr("loggedInMember", member);
-
+        rq.login(member);
         rq.replace("%s 님 로그인 되었습니다. 반갑습니다.".formatted(username), "/");
     }
 
@@ -68,8 +72,7 @@ public class MemberController {
     }
 
     public void doLogout(Rq rq) {
-        rq.removeSessionAttr("loggedInMember");
-
+        rq.logout();
         rq.replace("로그아웃 되었습니다.", "/");
     }
 }

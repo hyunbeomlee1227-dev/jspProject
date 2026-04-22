@@ -13,6 +13,7 @@ public class Rq {
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
     private final HttpSession session;
+    private final String sessionAttrName = "loggedInMember";
 
     public Rq(HttpServletRequest req, HttpServletResponse resp) {
         this.req = req;
@@ -164,4 +165,25 @@ public class Rq {
     public void removeSessionAttr(String attrName) {
         session.removeAttribute(attrName);
     }
+
+    public boolean hasSessionAttr(String attrName) {
+        return session.getAttribute(attrName) != null;
+    }
+
+    public void login(Object value) {
+        setSessionAttr(sessionAttrName, value);
+    }
+
+    public void logout() {
+        removeSessionAttr(sessionAttrName);
+    }
+
+    public boolean isLogined() {
+        return hasSessionAttr(sessionAttrName);
+    }
+
+    public boolean isLogout() {
+        return !isLogined();
+    }
+
 }
