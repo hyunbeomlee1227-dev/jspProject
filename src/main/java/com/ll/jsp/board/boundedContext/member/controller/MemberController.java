@@ -8,7 +8,7 @@ import com.ll.jsp.board.boundedContext.member.service.MemberService;
 public class MemberController {
     private final MemberService memberService;
 
-    public MemberController () {
+    public MemberController() {
         memberService = Container.memberService;
     }
 
@@ -59,7 +59,12 @@ public class MemberController {
 
         rq.setSessionAttr("loggedInMember", member);
 
-        rq.replace("%s 님 로그인 되었습니다. 반갑습니다.".formatted(username), "/" );
+        rq.replace("%s 님 로그인 되었습니다. 반갑습니다.".formatted(username), "/");
+    }
+
+    public void showMe(Rq rq) {
+        Member member = (Member) rq.getSessionAttr("loggedInMember");
+        rq.print("로그인된 회원 : " + member.getUsername());
     }
 }
 

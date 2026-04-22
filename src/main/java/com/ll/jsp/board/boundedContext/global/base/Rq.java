@@ -156,4 +156,8 @@ public class Rq {
     public void setSessionAttr(String attrName, Object value) {
         session.setAttribute(attrName, value);
     }
+
+    public Object getSessionAttr(String loggedInMember) {
+        return session.getAttribute(loggedInMember);
+    }
 }
